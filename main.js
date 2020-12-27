@@ -1,7 +1,7 @@
 
 let numBalls = 12;
 let spring = 0.05;
-let gravity = 0.03;
+let gravity = 0.05;
 let friction = -0.9;
 let balls = [];
 
@@ -54,7 +54,6 @@ class Ball {
 
   collide() {
     for (let i = this.id + 1; i < numBalls; i++) {
-      // console.log(others[i]);
       let dx = this.others[i].x - this.x;
       let dy = this.others[i].y - this.y;
       let distance = sqrt(dx * dx + dy * dy);
@@ -70,8 +69,9 @@ class Ball {
         this.others[i].vx += ax;
         this.others[i].vy += ay;
 
-        let freq = constrain(map(this.vx, -1, 1, 100, 1000), 100, 1000);
-        let amp = constrain(map(this.vy, -2, 2, 0, 1), 0.1, 1);
+        console.log(distance);
+        let freq = constrain(map(angle, -PI, PI, 100, 1000), 100, 1000);
+        let amp = constrain(map(distance, 0, 35, 0, 1), 0.1, 1);
         this.osc.pan(this.x/width)
         this.osc.freq(freq, 0.1);
         this.osc.amp(amp, 0.1);
